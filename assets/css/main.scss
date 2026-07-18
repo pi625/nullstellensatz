@@ -1,0 +1,85 @@
+/* assets/css/main.scss */
+
+/* Variables */
+$accent: #7FB3F5;
+$glass-bg: rgba(255,255,255,0.6);
+$glass-bg-dark: rgba(10,12,15,0.45);
+
+/* Pico base is already loaded; we layer site styles here */
+:root {
+  --accent: #7FB3F5;
+  --muted: #6b7280;
+  --glass: rgba(255,255,255,0.65);
+}
+
+/* Layout */
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* Article */
+article {
+  padding: 1.4rem 0;
+}
+
+article h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.2rem;
+}
+
+p {
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+/* Glass card */
+.glass {
+  background: $glass-bg;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(3, 7, 18, 0.06);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Dark mode adjustments (Moonwalk-inspired) */
+[data-theme="dark"] {
+  :root {
+    --accent: #5aa8ff;
+  }
+  .glass {
+    background: $glass-bg-dark;
+    border: 1px solid rgba(255,255,255,0.04);
+    color: #e5e7eb;
+  }
+  body {
+    background: #071024;
+    color: #e6eef8;
+  }
+}
+
+/* Widgets */
+.widget {
+  margin: 1.1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.widget h3 {
+  margin-top: 0;
+}
+
+/* Progress bar color */
+#progress-bar {
+  background: $accent;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 640px) {
+  article h1 {
+    font-size: 1.7rem;
+  }
+}

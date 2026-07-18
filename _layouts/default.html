@@ -1,40 +1,24 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page.title | default: site.title }}</title>
-  <meta name="description" content="{{ page.excerpt | default: site.description }}">
-  <!-- Pico (light theme by default) -->
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.7/css/pico.min.css">
-  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
-  <script>
-    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] } };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
+<html lang="{{ page.lang | default: 'en' }}" data-theme="{{ site.theme_config.appearance | default: 'auto' }}">
+{% include head.html %}
 <body>
-  <!-- Reading progress bar (widgets & interactivity enabled by default) -->
-  <div id="progress-bar" aria-hidden="true" style="position:fixed;top:0;left:0;height:4px;background:var(--accent, #0078e7);width:0;z-index:9999;transition:width 0.1s linear"></div>
-
-  <header class="container">
-    <nav>
-      <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    </nav>
-  </header>
-
-  <main class="container">
+  {% include header.html %}
+  <div id="progress-bar" aria-hidden="true" style="position:fixed;top:0;left:0;height:4px;width:0;z-index:9999;background:#7FB3F5"></div>
+  <main class="container flow">
     {{ content }}
   </main>
-
-  <footer class="container">
-    <p>{{ site.title }} — Created for the Summer of Math Exposition.</p>
-  </footer>
-
-  <!-- Core scripts -->
-  <script src="{{ '/js/main.js' | relative_url }}"></script>
-  <!-- Widgets: included by default so pages are interactive out of the box -->
-  <script src="{{ '/js/widgets/widget1_sumset.js' | relative_url }}"></script>
-  <script src="{{ '/js/widgets/widget2.js' | relative_url }}"></script>
+  {% include footer.html %}
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <!-- Widget placeholders (loaded by default) -->
+  <script src="{{ '/assets/js/widgets/widget1.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget2.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget3.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget4.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget5.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget6.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget7.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget8.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget9.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/widgets/widget10.js' | relative_url }}"></script>
 </body>
 </html>
