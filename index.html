@@ -1,1 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Polynomial Cheat Code</title>
+    
+    <!-- Google Fonts for clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <header class="site-header">
+        <h1>The Polynomial Cheat Code</h1>
+        <p class="subtitle">From Cauchy-Davenport to the Cap Set Problem</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- ================================= -->
+        <!-- SECTION 1: THE HOOK              -->
+        <!-- ================================= -->
+        <section id="section-1">
+            <h2>1. The Sumset Puzzle</h2>
+            
+            <p>
+                Pick any 4 numbers from the set $\{0, 1, 2, 3, 4, 5, 6\}$. Add every possible pair together, wrapping around modulo 7. How many unique numbers do you get?
+            </p>
+            
+            <p>
+                Let's define the notation simply. We have a prime $p$, and two sets $A$ and $B$ which are subsets of $\mathbb{Z}_p$. We define the <strong>sumset</strong> as:
+                $$ A+B = \{a + b \pmod p \mid a \in A, b \in B\} $$             </p>
+
+            <!-- WIDGET 1: FULL PLAYGROUND -->
+            <div id="widget-1-container" class="widget-box">
+                <h3>Playground: Build a Sumset</h3>
+                <p>Use the dropdown to pick a prime $p$. Click circles to toggle elements in $A$ (red) and $B$ (blue). Watch $A+B$ (green) populate.</p>
+                
+                <div class="widget-controls">
+                    <label for="prime-selector">Choose $p$:</label>
+                    <select id="prime-selector">
+                        <option value="5">5</option>
+                        <option value="7" selected>7</option>
+                        <option value="11">11</option>
+                        <option value="13">13</option>
+                    </select>
+                </div>
+
+                <div id="set-builder-display" class="set-builder">
+                    <!-- JS populates A, B, and A+B rows here -->
+                </div>
+
+                <div class="data-readout">
+                    <span>$|A|$ = <strong id="size-A">0</strong></span> | 
+                    <span>$|B|$ = <strong id="size-B">0</strong></span> | 
+                    <span>$|A+B|$ = <strong id="size-sum">0</strong></span>
+                </div>
+            </div>
+
+            <p>
+                Play around with different primes, different set sizes. Try to find a lower bound. What's the absolute worst-case scenario for $|A+B|$? If you think you've got it, formulate your guess below.
+            </p>
+
+            <!-- WIDGET 1B: GUESS THE BOUND -->
+            <div id="widget-1-guess" class="widget-box guess-box">
+                <h3>What's the structural guarantee?</h3>
+                <p>I think the bound is a:</p>
+                <select id="min-max-dropdown">
+                    <option value="min">min</option>
+                    <option value="max">max</option>
+                </select>
+                <p>of some expression involving $p$, $|A|$, and $|B|$:</p>
+                <input type="text" id="bound-guess-input" placeholder="e.g., p, |A|+|B|-1">
+                <button id="submit-guess-btn">Check my guess</button>
+                <p id="guess-feedback" class="feedback-text"></p>
+                <details>
+                    <summary>I give up, just show me the answer.</summary>
+                    <p>No matter how cleverly you pick $A$ and $B$, the size of $A+B$ never drops below $\min(p, |A|+|B|-1)$.</p>
+                </details>
+            </div>
+
+            <p>
+                If you guessed that $|A+B|$ never drops below $\min(p, |A|+|B|-1)$, you just rediscovered the <strong>Cauchy-Davenport theorem</strong>, originally proved in 1935. Historically, proving this meant messy, case-by-case combinatorial analysis. How do you even think to prove this? I invite you to think about it for a second. 
+            </p>
+
+            <p>
+                Proving this by brute force is a nightmare. Checking every pair takes $O(|A||B|)$ time, and the "wrapping around" of modulo arithmetic destroys our normal intuition about numbers. We need a structural guarantee.
+            </p>
+
+            <p>
+                But we aren't going to attack this head-on. Instead, we're going to take a step back and consider a seemingly completely unrelated question. As we build this theory more and more, we will eventually be able to sledgehammer this problem.
+            </p>
+
+            <p>
+                Think back to the Fundamental Theorem of Algebra. A non-zero univariate polynomial of degree $d$ has at most $d$ roots. It's a beautiful fact, but it feels... one-dimensional. What happens if we take this idea to $n$ dimensions?
+            </p>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 2: THE ENCODING           -->
+        <!-- ================================= -->
+        <section id="section-2">
+            <h2>2. The Encoding & The Univariate Hammer</h2>
+            <p>[Text explaining how sets become polynomials. $A = \{a_1, a_2\}$ becomes $P_A(x) = (x-a_1)(x-a_2)$.]</p>
+            <div id="widget-2-container" class="widget-box">
+                <!-- Widget 2: The Polynomial Encoder -->
+                <p>[Widget placeholder: Click numbers, build polynomial, plot roots.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 3: CHEVALLEY-WARNING      -->
+        <!-- ================================= -->
+        <section id="section-3">
+            <h2>3. Chevalley-Warning (1935)</h2>
+            <p>[Text explaining the theorem: If $\sum \deg(f_i) < n$, $p$ divides the number of roots.]</p>
+            <div id="widget-3-container" class="widget-box">
+                <!-- Widget 3: Chevalley-Warning Counter -->
+                <p>[Widget placeholder: Input polynomials, see root count divisible by p.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 4: ALON-FÜREDI            -->
+        <!-- ================================= -->
+        <section id="section-4">
+            <h2>4. Alon-Füredi (1993)</h2>
+            <p>[Text explaining the grid problem: Vanishing on all but one point forces $\deg(f) \ge \sum(|A_i|-1)$.]</p>
+            <div id="widget-4-container" class="widget-box">
+                <!-- Widget 4: The Grid Vanisher -->
+                <p>[Widget placeholder: 2D grid, toggle points, calculate minimum degree.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 5: IMO 2007/6             -->
+        <!-- ================================= -->
+        <section id="section-5">
+            <h2>5. IMO 2007/6: The First Kill</h2>
+            <p>[Text setting up the problem: $3n$ planes covering a grid except the origin.]</p>
+            <div id="widget-5-container" class="widget-box">
+                <!-- Widget 5: The Plane Placer -->
+                <p>[Widget placeholder: 3D grid, place planes, count coverage.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 6: NULLSTELLENSATZ        -->
+        <!-- ================================= -->
+        <section id="section-6">
+            <h2>6. Alon’s Combinatorial Nullstellensatz (1999)</h2>
+            <p>[Text stating the main theorem. The magic wand.]</p>
+            <div id="widget-6-container" class="widget-box">
+                <!-- Widget 6: The Coefficient Spotlight -->
+                <p>[Widget placeholder: Show $(x+y)^{|A|+|B|-2}$, highlight coefficient, gauge flips to NON-ZERO.]</p>
+            </div>
+            <aside class="sidebar">
+                <h4>Try It Yourself: Russia MO 2007/5</h4>
+                <p>[Problem text about the 100-gon. Hidden solution inside details tag.]</p>
+                <details>
+                    <summary>Show Solution</summary>
+                    <p>[Solution text]</p>
+                </details>
+            </aside>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 7: CAUCHY-DAVENPORT       -->
+        <!-- ================================= -->
+        <section id="section-7">
+            <h2>7. Demolishing Cauchy-Davenport</h2>
+            <p>[Text showing the 2-line proof using the Nullstellensatz.]</p>
+            <div id="widget-7-container" class="widget-box">
+                <!-- Widget 7: The Sumset Builder (Upgraded) -->
+                <p>[Widget placeholder: Z_p clock with step-by-step proof alongside.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 8: ERDŐS-HEILBRONN WALL   -->
+        <!-- ================================= -->
+        <section id="section-8">
+            <h2>8. The Erdős-Heilbronn Wall</h2>
+            <p>[Text introducing restricted sums $A \dotplus A$. Explain why standard polynomial fails degree check.]</p>
+            <div id="widget-8-container" class="widget-box">
+                <!-- Widget 8: The Restricted Sumset Playground -->
+                <p>[Widget placeholder: Build restricted sumset, see DEGREE VIOLATION warning.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 9: THE (x-y) HACK         -->
+        <!-- ================================= -->
+        <section id="section-9">
+            <h2>9. The $(x-y)$ Hack</h2>
+            <p>[Text explaining Dias da Silva-Hamidoune: multiply by $(x-y)$ to kill diagonal and drop degree.]</p>
+            <div id="widget-9-container" class="widget-box">
+                <!-- Widget 9: The Diagonal Killer -->
+                <p>[Widget placeholder: Watch $(x-y)$ annihilate terms, degree drops, gauge flips to NON-ZERO.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 10: KÁROLYI EXTENSION     -->
+        <!-- ================================= -->
+        <section id="section-10">
+            <h2>10. The Károlyi Extension (2005)</h2>
+            <p>[Text explaining extension to all abelian groups, not just prime fields.]</p>
+            <div id="widget-10-container" class="widget-box">
+                <!-- Widget 10: The Group Selector -->
+                <p>[Widget placeholder: Pick group type, see polynomial adapt.]</p>
+            </div>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 11: ALON-TARSI            -->
+        <!-- ================================= -->
+        <section id="section-11">
+            <h2>11. The Alon-Tarsi Theorem: Graph List Coloring</h2>
+            <p>[Text explaining list coloring and how polynomial coefficients guarantee colorability.]</p>
+            <div id="widget-11-container" class="widget-box">
+                <!-- Widget 11: The List Coloring Simulator -->
+                <p>[Widget placeholder: Small graph, color lists, show underlying polynomial coefficient.]</p>
+            </div>
+            <aside class="sidebar">
+                <h4>Try It Yourself: Alon's Problems</h4>
+                <p><strong>Problem 6:</strong> [p-regular subgraph text]</p>
+                <p><strong>Problem 8:</strong> [Vectors in $\{\pm 1\}^n$ text]</p>
+                <details>
+                    <summary>Show Solutions</summary>
+                    <p>[Solutions text]</p>
+                </details>
+            </aside>
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 12: HILBERT               -->
+        <!-- ================================= -->
+        <section id="section-12">
+            <h2>12. Hilbert’s Nullstellensatz: The Ancestor</h2>
+            <p>[Text connecting Alon's theorem back to Hilbert's 1893 continuous version over $\mathbb{C}$.]</p>
+            <!-- Visual diagram placeholder rather than interactive widget -->
+        </section>
+
+        <!-- ================================= -->
+        <!-- SECTION 13: SLICE RANK            -->
+        <!-- ================================= -->
+        <section id="section-13">
+            <h2>13. The Slice Rank Revolution (2016)</h2>
+            <p>[Text explaining the Cap Set problem and the 2016 breakthrough.]</p>
+            <div id="widget-13-container" class="widget-box">
+                <!-- Widget 13: The Cap Set Visualizer -->
+                <p>[Widget placeholder: Cap set growth, old bound vs. new bound comparison.]</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Created for the Summer of Math Exposition. Math is beautiful.</p>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/widgets/widget1_sumset.js"></script>
+</body>
+</html>
