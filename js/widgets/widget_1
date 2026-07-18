@@ -1,4 +1,4 @@
-// js/widgets/widget1_sumset.js
+// js/widgets/widget_1.js
 
 document.addEventListener("DOMContentLoaded", () => {
     const primeSelector = document.getElementById('prime-selector');
