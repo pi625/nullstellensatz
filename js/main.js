@@ -5,5 +5,6 @@ window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;
     
     const progress = (scrolled / (docHeight - winHeight)) * 100;
-    document.getElementById('progress-bar').style.width = `${progress}%`;
+    const bar = document.getElementById('progress-bar');
+    if (bar) bar.style.width = `${Math.max(0, Math.min(100, progress))}%`;
 });
