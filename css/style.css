@@ -1,1 +1,223 @@
+/* css/style.css */
+:root {
+    --bg-color: #131416;
+    --text-color: #e0e0e0;
+    --accent-color: #61afef;
+    --container-width: 800px;
+    --font-main: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
 
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Reading Progress Bar */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: var(--accent-color);
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+}
+
+/* Header */
+.site-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 40px;
+}
+
+.site-header h1 {
+    font-size: 3em;
+    margin: 0;
+    color: #fff;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Container */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px 100px;
+}
+
+/* Typography */
+h2 {
+    font-size: 2.2em;
+    color: #ffffff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-top: 3em;
+}
+
+h3 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 1.2em;
+}
+
+/* MathJax */
+mjx-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 5px 0;
+}
+
+/* Widget Box */
+.widget-box {
+    background-color: #1e1e22;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.widget-controls {
+    margin-bottom: 15px;
+}
+
+.widget-controls select, .widget-controls button {
+    background-color: #2a2a2e;
+    color: var(--text-color);
+    border: 1px solid #444;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    cursor: pointer;
+}
+
+/* Set Builder */
+.set-builder-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.set-label {
+    width: 50px;
+    font-weight: bold;
+    font-family: var(--font-mono);
+    color: #888;
+}
+
+.circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2a2a2e;
+    border: 2px solid #444;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    font-family: var(--font-mono);
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    border-color: #777;
+}
+
+.circle.active-A { background-color: #e06c75; border-color: #e06c75; color: #fff; }
+.circle.active-B { background-color: #61afef; border-color: #61afef; color: #fff; }
+.circle.active-sum { background-color: #98c379; border-color: #98c379; color: #fff; }
+
+.data-readout {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    color: #d19a66;
+    text-align: center;
+}
+
+/* Guess Box */
+.guess-box { text-align: center; }
+
+.guess-box select, .guess-box input {
+    background-color: #2a2a2e;
+    color: var(--text-color);
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 5px;
+    font-family: var(--font-mono);
+}
+
+.guess-box button {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.feedback-text { font-weight: bold; margin-top: 15px; }
+.feedback-text.correct { color: #98c379; }
+.feedback-text.incorrect { color: #e06c75; }
+
+/* Sidebars */
+.sidebar {
+    background-color: #1a1a1e;
+    border-left: 4px solid var(--accent-color);
+    padding: 20px;
+    margin: 40px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar h4 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+/* Details/Summary */
+details {
+    margin-top: 15px;
+    background: #2a2a2e;
+    padding: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+details p {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #555;
+    border-top: 1px solid #333;
+}
