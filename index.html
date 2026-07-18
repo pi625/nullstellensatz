@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Polynomial Cheat Code</title>
+    <title>The Nullstellensatz</title>
     
     <!-- Google Fonts for clean typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +30,8 @@
     <div id="progress-bar"></div>
 
     <header class="site-header">
-        <h1>The Polynomial Cheat Code</h1>
-        <p class="subtitle">From Cauchy-Davenport to the Cap Set Problem</p>
+        <h1>The Nullstellensatz</h1>
+        <p class="subtitle">by []</p>
     </header>
 
     <main class="container">
@@ -40,7 +40,7 @@
         <!-- SECTION 1: THE HOOK              -->
         <!-- ================================= -->
         <section id="section-1">
-            <h2>1. The Sumset Puzzle</h2>
+            <h2>A puzzle on modular arithmetic</h2>
             
             <p>
                 Pick any 4 numbers from the set $\{0, 1, 2, 3, 4, 5, 6\}$. Add every possible pair together, wrapping around modulo 7. How many unique numbers do you get?
@@ -52,7 +52,7 @@
 
             <!-- WIDGET 1: FULL PLAYGROUND -->
             <div id="widget-1-container" class="widget-box">
-                <h3>Playground: Build a Sumset</h3>
+                <h3>Build a Sumset</h3>
                 <p>Use the dropdown to pick a prime $p$. Click circles to toggle elements in $A$ (red) and $B$ (blue). Watch $A+B$ (green) populate.</p>
                 
                 <div class="widget-controls">
@@ -77,7 +77,7 @@
             </div>
 
             <p>
-                Play around with different primes, different set sizes. Try to find a lower bound. What's the absolute worst-case scenario for $|A+B|$? If you think you've got it, formulate your guess below.
+                Play around with different primes, different set sizes. Try to find a lower bound. What's the absolute worst-case scenario for $|A+B|$? If you think you've got it, guess the bound below.
             </p>
 
             <!-- WIDGET 1B: GUESS THE BOUND -->
@@ -89,12 +89,12 @@
                     <option value="max">max</option>
                 </select>
                 <p>of some expression involving $p$, $|A|$, and $|B|$:</p>
-                <input type="text" id="bound-guess-input" placeholder="e.g., p, |A|+|B|-1">
+                <input type="text" id="bound-guess-input" placeholder="e.g., p, |AB|">
                 <button id="submit-guess-btn">Check my guess</button>
                 <p id="guess-feedback" class="feedback-text"></p>
                 <details>
-                    <summary>I give up, just show me the answer.</summary>
-                    <p>No matter how cleverly you pick $A$ and $B$, the size of $A+B$ never drops below $\min(p, |A|+|B|-1)$.</p>
+                    <summary>Give up.</summary>
+                    <p>The size of $A+B$ never drops below $\min(p, |A|+|B|-1)$.</p>
                 </details>
             </div>
 
@@ -111,7 +111,7 @@
             </p>
 
             <p>
-                Think back to the Fundamental Theorem of Algebra. A non-zero univariate polynomial of degree $d$ has at most $d$ roots. It's a beautiful fact, but it feels... one-dimensional. What happens if we take this idea to $n$ dimensions?
+                Think back to the Fundamental Theorem of Algebra. A non-zero univariate (involving a single variable) polynomial of degree $d$ has at most $d$ roots. Let's consider a very natural extension of this problem. What happens if we take this idea to $n$ dimensions?
             </p>
         </section>
 
@@ -119,7 +119,7 @@
         <!-- SECTION 2: THE ENCODING           -->
         <!-- ================================= -->
         <section id="section-2">
-            <h2>2. The Encoding & The Univariate Hammer</h2>
+            <h2>Sets as polynomials?</h2>
             <p>[Text explaining how sets become polynomials. $A = \{a_1, a_2\}$ becomes $P_A(x) = (x-a_1)(x-a_2)$.]</p>
             <div id="widget-2-container" class="widget-box">
                 <!-- Widget 2: The Polynomial Encoder -->
@@ -281,6 +281,6 @@
 
     <!-- JS Scripts -->
     <script src="js/main.js"></script>
-    <script src="js/widgets/widget1_sumset.js"></script>
+    <script src="js/widgets/widget_1.js"></script>
 </body>
 </html>
