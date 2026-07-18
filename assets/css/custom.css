@@ -1,0 +1,13 @@
+/* Minimal custom styles to tweak Pico for this site */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+header.container nav a {
+  font-weight: 700;
+  text-decoration: none;
+}
+footer.container {
+  margin-top: 3rem;
+  color: #555;
+}

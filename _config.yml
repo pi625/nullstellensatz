@@ -1,0 +1,8 @@
+title: "nullstellensatz"
+description: "From Cauchy-Davenport to the Nullstellensatz — a small math exposition"
+baseurl: ""
+url: ""
+markdown: kramdown
+theme: minima
+
+# Optional: add any plugins you want later
