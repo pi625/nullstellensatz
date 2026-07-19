@@ -269,8 +269,9 @@ p code, li code {
 }
 
 .post-title {
-  margin-bottom: -1.5rem;
-  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+  font-weight: 800;
   background: linear-gradient(135deg, var(--headings), var(--links));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -327,7 +328,7 @@ p code, li code {
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
-  padding: 1.8rem;
+  padding: 2rem;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.4);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
@@ -364,7 +365,7 @@ p code, li code {
   &:hover {
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 16px 48px rgba(31, 38, 135, 0.25), inset 0 0 24px rgba(255, 255, 255, 0.5);
-    transform: translateY(-6px) scale(1.01);
+    transform: translateY(-4px);
   }
 }
 
@@ -375,7 +376,7 @@ p code, li code {
   &:hover {
     background: rgba(15, 20, 40, 0.75);
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 0 24px rgba(255, 255, 255, 0.15);
-    transform: translateY(-6px) scale(1.01);
+    transform: translateY(-4px);
   }
 }
 
@@ -392,15 +393,6 @@ p code, li code {
   }
   66% {
     transform: translate(-20px, 30px);
-  }
-}
-
-@keyframes shimmer {
-  0%, 100% {
-    background-position: 200% center;
-  }
-  50% {
-    background-position: 0% center;
   }
 }
 
