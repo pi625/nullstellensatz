@@ -12,7 +12,8 @@ highlighter: rouge
 permalink: /blog/:title/
 
 kramdown:
-  input: GFM
+  # Default kramdown parser (not GFM): GFM treats "|" in inline $math$ as
+  # table delimiters, which breaks equations with absolute-value bars.
   syntax_highlighter: rouge
   math_engine: mathjax
 

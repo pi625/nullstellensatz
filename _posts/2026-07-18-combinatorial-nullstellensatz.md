@@ -46,7 +46,7 @@ Alon's **Combinatorial Nullstellensatz** makes the bridge precise.
 > **Theorem (Alon, 1999).** Let $F$ be a field and $f \in F[x_1, \dots, x_n]$ a
 > polynomial of total degree $\sum_{i} t_i$. Suppose the coefficient of
 > $\prod_i x_i^{t_i}$ in $f$ is non-zero. If $S_1, \dots, S_n \subseteq F$ with
-> $|S_i| > t_i$, then there exist $s_i \in S_i$ such that
+> $\lvert S_i \rvert > t_i$, then there exist $s_i \in S_i$ such that
 >
 > $$ f(s_1, \dots, s_n) \neq 0. $$
 
@@ -58,7 +58,7 @@ fact reproduces a startling range of combinatorial results.
 
 If $f$ vanished on the entire grid $S_1 \times \dots \times S_n$, you could reduce
 $f$ modulo the vanishing polynomials $g_i(x_i) = \prod_{s \in S_i}(x_i - s)$ without
-raising any partial degree past $|S_i| - 1$. But that reduction can never touch the
+raising any partial degree past $\lvert S_i \rvert - 1$. But that reduction can never touch the
 monomial $\prod_i x_i^{t_i}$ (each exponent $t_i$ is too small to be rewritten), so
 its coefficient would have to be zero — a contradiction. The non-zero coefficient is
 exactly the obstruction to "vanishing everywhere."
@@ -69,12 +69,12 @@ Over $\mathbb{Z}/p\mathbb{Z}$ the same warm-up bound survives modular wraparound
 
 $$ |A + B| \ge \min\{\,p,\ |A| + |B| - 1\,\}. $$
 
-Assume it fails. Pick a set $C \supseteq A + B$ with $|C| = |A| + |B| - 2$ and study
+Assume it fails. Pick a set $C \supseteq A + B$ with $\lvert C \rvert = \lvert A \rvert + \lvert B \rvert - 2$ and study
 
 $$ f(x, y) = \prod_{c \in C} (x + y - c). $$
 
-Its total degree is $|A| + |B| - 2$, and the coefficient of $x^{|A|-1} y^{|B|-1}$ is
-the binomial coefficient $\binom{|A| + |B| - 2}{|A| - 1} \not\equiv 0 \pmod p$. The
+Its total degree is $\lvert A \rvert + \lvert B \rvert - 2$, and the coefficient of $x^{\lvert A \rvert-1} y^{\lvert B \rvert-1}$ is
+the binomial coefficient $\binom{\lvert A \rvert + \lvert B \rvert - 2}{\lvert A \rvert - 1} \not\equiv 0 \pmod p$. The
 Nullstellensatz then hands us $a \in A$, $b \in B$ with $f(a,b) \neq 0$ — but $a + b
 \in A + B \subseteq C$ makes some factor vanish. Contradiction. The bound holds.
 
