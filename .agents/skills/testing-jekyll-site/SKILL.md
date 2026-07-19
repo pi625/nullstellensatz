@@ -18,8 +18,8 @@ description: How to run and test the nullstellensatz Jekyll static blog locally 
 - Theme toggle: bottom-right circular glass button (`.theme-toggle`); it flips `data-theme` on `<html>` and persists to `localStorage`. Verify via `document.documentElement.getAttribute('data-theme')`.
 - Math: MathJax 3 CDN; typeset math appears as `<mjx-container>`/`<math>` in the DOM (not raw `$...$`).
 
-## Known gotcha (kramdown GFM + inline math with pipes)
-`_config.yml` uses `kramdown` with `input: GFM`. A **paragraph line** containing inline math with pipe chars, e.g. `... with $|C| = |A| + |B| - 2$ ...`, is mis-parsed as a GFM **table** — it renders as a bordered table with literal `$` visible instead of typeset math. When testing posts, inspect the generated `_site/.../index.html` for unexpected `<table>` elements. Display math `$$...$$` blocks with `|` render fine; the issue is inline `$...$` with bare pipes on a table-eligible line. Fix is authoring-side: use `\lvert ... \rvert` instead of `|`.
+## Known gotcha (kramdown GFM + inline math with pipes) — FIXED as of commit 8c70c8f
+If `_config.yml` sets `kramdown: input: GFM`, a **paragraph line** with inline math containing pipe chars, e.g. `... with $|C| = |A| + |B| - 2$ ...`, is mis-parsed as a GFM **table** — rendering a bordered table with literal `$` instead of typeset math. This was fixed by (1) dropping `input: GFM` from `_config.yml` and (2) escaping bars to `\lvert ... \rvert` in the post. When testing posts, a fast regression check is: `grep -rc '<table' _site --include='*.html'` should be **0** (no post/page legitimately uses tables). Display math `$$...$$` blocks with `|` were never affected. Note: raw served HTML contains `$...$` delimiters (typeset client-side by MathJax); the browser DOM shows `<mjx-container>`/`<math>` after JS runs.
 
 ## Devin Secrets Needed
 None.

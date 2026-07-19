@@ -1,76 +1,49 @@
-# Test Report — nullstellensatz Jekyll glassmorphism blog (PR #2)
+# Test Report — nullstellensatz (PR #2) — Re-test after math-bug fix
 
-**Branch:** `devin/1784426225-jekyll-glassmorphism-blog`
-**How tested:** Ran the site locally (`bundle exec jekyll serve` at http://127.0.0.1:4000) and exercised the golden paths end-to-end in Chrome, plus DOM/source inspection to confirm findings.
+**Branch:** `devin/1784426225-jekyll-glassmorphism-blog` · **Commit:** `8c70c8f` ("Fix inline math rendering: escape absolute-value bars, drop GFM parser")
+**How tested:** Killed the old server, `rm -rf _site .jekyll-cache`, rebuilt fresh with `bundle exec jekyll serve`, then verified in Chrome. Focus: the previously-reported inline-math table bug + regression smoke test.
 
-## Summary
-The site works well overall — home page, navigation, blog index, post pages, MathJax typesetting, glassmorphism, and the light/dark theme toggle all function. **One real bug found:** in the Combinatorial Nullstellensatz post, an inline math expression containing pipe characters is parsed by kramdown as a GFM Markdown table, so it renders as a bordered table with literal `$` signs instead of typeset math.
+## Result: FIX VERIFIED — no regressions
 
-## Results
-
-| # | Test | Result |
-|---|------|--------|
-| T1 | Home renders (hero, intro glass card, Writing section, 2 post cards) | PASS |
-| T2 | Nav links (Home / Writing / About) | PASS |
-| T3 | /blog/ lists both posts, clicking opens post | PASS |
-| T4 | Post: MathJax typeset, glass surface, date, reading time, tags | PASS (with 1 math bug — see below) |
-| T5 | Theme toggle light ↔ dark, glass + blobs both modes | PASS |
-| T6 | About page | PASS |
-| T7 | No console errors / no Liquid artifacts | PASS |
+| # | Check | Result |
+|---|-------|--------|
+| 1 | Cauchy–Davenport equation `$|C| = |A| + |B| - 2$` renders as typeset math (no table, no literal `$`) | PASS |
+| 1b | Whole post free of broken equations / stray `<table>` | PASS (0 `<table>` in generated HTML) |
+| 2 | Regression: home, /blog/, theme toggle | PASS |
+| — | Console clean across pages/themes | PASS |
 
 ---
 
-## T1 — Home page (light)
-Hero title "nullstellensatz", tagline, description, intro glass card, "Writing" section with "All posts →", and both post cards (with dates + tags) all present. No Liquid artifacts.
+## The fix (before → after)
 
-![Home light](https://app.devin.ai/attachments/1453990f-ed43-4e9c-a820-dabb5c96b78e/ss_b025cd12.png)
+Previously, the source line `...with $|C| = |A| + |B| - 2$ and study` was mis-parsed by kramdown's GFM mode as a table. Now it renders as a normal paragraph with typeset inline math.
 
-## T5 — Theme toggle (dark)
-Clicking the bottom-right circular glass button flips `<html data-theme>` to `dark` (verified via DOM). The whole palette changes to dark navy/purple, frosted glass cards and gradient blobs remain correct. Clicking again returns to light. Bidirectional.
-
-![Home dark](https://app.devin.ai/attachments/616ffa70-b036-418e-a3dd-a7c5a3eeeb5b/ss_97f47b7e.png)
-
-## T2 / T3 — Navigation & blog index
-`/blog/` lists both posts; nav links land on correct URLs (`/`, `/blog/`, `/about/`) with active-link styling.
-
-| /blog/ (Writing) | /about/ |
+| 🔴 Before (bug) | 🟢 After (fixed) |
 |---|---|
-| ![blog](https://app.devin.ai/attachments/baf18608-995a-4ad7-bd6c-f82d1205f5f6/ss_7c9fce9b.png) | ![about](https://app.devin.ai/attachments/556e7d5c-5067-48fc-baa4-3a11f70e2ee0/ss_364a9f3b.png) |
+| ![before](https://app.devin.ai/attachments/a6ea907c-58e8-45d7-b07d-88576a79a903/ss_zoom_0879591d.png) | ![after](https://app.devin.ai/attachments/dead3c45-99cc-4098-b012-8e7a0209d3e6/ss_zoom_1d77c2bb.png) |
 
-## T4 — Post page: MathJax + glass + meta
-The Combinatorial Nullstellensatz post opens with a frosted glass article surface, header showing date + "640 words, 4 min read", and 3 tags. Most math is correctly typeset by MathJax (rendered as `<mjx-container>`/`<math>`, not raw `$...$`). Dark mode also renders math correctly on the glass surface.
+The fixed section reads as a single flowing paragraph — "Assume it fails. Pick a set $C ⊇ A + B$ with $|C| = |A| + |B| − 2$ and study" — followed by the display equation, with the binomial coefficient and exponents (`x^{|A|-1} y^{|B|-1}`, `\binom{|A|+|B|-2}{|A|-1}`) all typeset correctly.
 
-| Typeset math (light) | Post in dark mode |
+![Fixed section in context](https://app.devin.ai/attachments/c78bf593-2c18-48e5-9793-d7ef39118f77/ss_62289557.png)
+
+**Verification details:**
+- Source now uses `\lvert ... \rvert` throughout the post (lines 49, 61, 72, 76, 77, …) and `_config.yml` no longer sets `input: GFM`.
+- Generated `_site` HTML: `grep -c '<table'` on the post = **0**; a repo-wide scan of `_site/**/*.html` = **0** files with `<table>`.
+- Browser DOM: the expression appears as `<mjx-container>`/`<math>` (typeset by MathJax), not a `<table>` and not literal `$`.
+
+## Regression smoke test
+
+| Home (light) | /blog/ index |
 |---|---|
-| ![math light](https://app.devin.ai/attachments/3dfb58b3-24ce-47c1-88dd-a6690f061905/ss_zoom_e8f1e9de.png) | ![math dark](https://app.devin.ai/attachments/9aeeffad-9c69-410e-a29e-98a95e7ca156/ss_706b2730.png) |
+| ![home](https://app.devin.ai/attachments/03879582-a634-4418-abfc-94ed0073d63f/ss_32213bac.png) | ![blog](https://app.devin.ai/attachments/a0e6a5bf-3a3d-4748-a9f8-58019daef0dd/ss_f83ffeb8.png) |
 
-### 🔴 BUG — Inline math with pipes parsed as a Markdown table
-In the "Cauchy–Davenport, for free" section, the source line (`_posts/2026-07-18-combinatorial-nullstellensatz.md:72`):
-
-```
-Assume it fails. Pick a set $C \supseteq A + B$ with $|C| = |A| + |B| - 2$ and study
-```
-
-is rendered as a **bordered table** with **literal `$` characters** visible, because kramdown's GFM input mode interprets the `|` (absolute-value bars) inside the inline math as table-column delimiters. The generated `_site` HTML contains exactly one `<table>` element from this line. The `$...$` delimiters are not consumed, so MathJax never typesets it.
-
-![Table bug zoom](https://app.devin.ai/attachments/cb2d671f-7ddf-40bd-93ca-60d13daa3cd2/ss_zoom_0879591d.png)
-
-Full-section context:
-
-![Table bug in context](https://app.devin.ai/attachments/99ef6571-0ebe-433b-9c5b-bf6f6ed36335/ss_24864ef4.png)
-
-**Suggested fixes (for the author, not applied):**
-- Convert the inline `|...|` bars to `\lvert ... \rvert` inside the math, e.g. `$\lvert C\rvert = \lvert A\rvert + \lvert B\rvert - 2$`, so no literal `|` remains in the text; **or**
-- Use display math / a form that doesn't put bare `|` in a table-eligible line; **or**
-- Disable GFM table parsing (this is a config-level tradeoff).
-
-Note: other lines with `|A + B|` inside `$$...$$` display blocks render fine — the issue is specifically the *inline* `$...$` with pipes on a paragraph line.
-
-## T7 — Console / artifacts
-Browser console was empty (no JS errors) on home, /blog/, post, and about pages, in both light and dark themes. No `{{ }}` / `{% %}` Liquid artifacts anywhere. MathJax CDN loaded without error.
+- Home page: hero, intro glass card, "Writing" section with both post cards + tags — intact.
+- /blog/ index: both posts listed with dates, tags, footer — intact.
+- Theme toggle: dark→light→dark flips correctly, glassmorphism + blobs correct.
+- Browser console: empty (no JS errors) on all pages, both themes.
 
 ---
 
 ## Artifacts
-- Recording: `/home/ubuntu/screencasts/rec-828236ae-38e6-4dbd-bcf1-fba3b8f8ac53/rec-828236ae-38e6-4dbd-bcf1-fba3b8f8ac53-edited.mp4`
+- Recording: `/home/ubuntu/screencasts/rec-caa88775-b2f3-4ea8-a458-8ac7eb28ff42/rec-caa88775-b2f3-4ea8-a458-8ac7eb28ff42-edited.mp4`
 - This report: `/home/ubuntu/repos/nullstellensatz/test-report.md`

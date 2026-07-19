@@ -127,7 +127,7 @@ html.transition, html.transition *, html.transition *:before, html.transition *:
 .page-content { padding: 0 1.25rem; }
 
 .w {
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
   padding: 2.5rem 0 4rem;
 }
@@ -195,7 +195,7 @@ html.transition, html.transition *, html.transition *:before, html.transition *:
   position: sticky;
   top: 0.85rem;
   z-index: 100;
-  max-width: 760px;
+  max-width: 820px;
   margin: 0.85rem auto 0;
   padding: 0.6rem 1.1rem;
   border-radius: 16px;
@@ -366,11 +366,12 @@ html.transition, html.transition *, html.transition *:before, html.transition *:
 .page-body > :last-child { margin-bottom: 0; }
 
 blockquote {
-  margin: 1.5em 0;
-  padding: 1em 1.4em;
-  border-left: 3px solid var(--links);
-  border-radius: 0 12px 12px 0;
-  background: var(--glass);
+  margin: 1.6em 0;
+  padding: 1.1em 1.5em;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--glass-strong);
+  box-shadow: var(--glass-inset), 0 4px 20px rgba(40, 55, 120, 0.06);
   color: var(--text);
   p:first-child { margin-top: 0; }
   p:last-child { margin-bottom: 0; }
