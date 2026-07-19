@@ -1,4 +1,6 @@
-/* Main stylesheet */
+---
+# Front matter is required so Jekyll processes this file with Sass.
+---
 @import "moonwalk";
 @import "list";
 @import "syntax";

@@ -1,0 +1,15 @@
+navbar_entries:
+  - title: Home
+    url: /
+  - title: Writing
+    url: /blog/
+  - title: About
+    url: /about/
+
+footer_entries:
+  - title: RSS
+    url: /feed.xml
+  - title: GitHub
+    url: https://github.com/pi625/nullstellensatz
+  - title: SoME
+    url: https://some.3b1b.co/
