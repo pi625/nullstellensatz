@@ -1,16 +1,20 @@
 ---
-layout: default
+layout: home
 title: Home
 ---
-<section>
-  <h1>{{ site.title }}</h1>
-  <p>{{ site.description }}</p>
-</section>
-<section>
-  <h2>Posts</h2>
-  <ul>
-  {% for post in site.posts %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> — <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></li>
-  {% endfor %}
-  </ul>
-</section>
+
+<p>
+  Welcome. <strong>nullstellensatz</strong> is a small corner of the internet for
+  math exposition — the kind of writing that takes a beautiful theorem and slows it
+  down until you can see exactly why it has to be true.
+</p>
+<p>
+  The through-line here is the <em>polynomial method</em>: the surprising idea that
+  counting the roots of a well-chosen polynomial can settle questions about sets,
+  sums, and structure. We start with elementary sumset puzzles and build all the way
+  to Alon's Combinatorial Nullstellensatz.
+</p>
+<p>
+  This site is my entry for the <a href="https://some.3b1b.co/" target="_blank" rel="noreferrer">Summer
+  of Math Exposition</a>. Have a look at the <a href="{{ '/blog/' | relative_url }}">writing</a>.
+</p>
