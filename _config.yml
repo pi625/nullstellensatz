@@ -1,8 +1,16 @@
 title: "nullstellensatz"
 description: "From Cauchy-Davenport to the Nullstellensatz — a small math exposition"
+author: "pi625"
 baseurl: ""
 url: ""
 markdown: kramdown
-theme: minima
+sass:
+  sass_dir: _sass
+  style: :compressed
 
-# Optional: add any plugins you want later
+theme_config:
+  appearance: "auto"
+  appearance_toggle: true
+  show_navbar: false
+  show_copyright: true
+  show_footer: false
