@@ -1,24 +1,57 @@
-<!doctype html>
-<html lang="{{ page.lang | default: 'en' }}" data-theme="{{ site.theme_config.appearance | default: 'auto' }}">
-{% include head.html %}
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: "en" }}" class="html" data-theme="{{ site.theme_config.appearance | default: "auto" }}">
+{%- include head.html -%}
+
 <body>
-  {% include header.html %}
-  <div id="progress-bar" aria-hidden="true" style="position:fixed;top:0;left:0;height:4px;width:0;z-index:9999;background:#7FB3F5"></div>
-  <main class="container flow">
-    {{ content }}
+  <main class="page-content" aria-label="Content">
+    <div class="w">
+      {{ content }}
+      {% if site.theme_config.appearance_toggle %}
+        {% include toggle_theme_button.html %}
+      {% endif %}
+      <div class="credits">
+        {%- if site.theme_config.show_copyright == true -%}
+        &copy;&nbsp;{{ "now" | date: "%Y" }}&nbsp;{{site.author}}
+        &nbsp;
+        •
+        &nbsp;
+        {%- endif -%}
+        Theme&nbsp;<a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+        &nbsp;•&nbsp;
+        <a href="https://github.com/pi625/nullstellensatz" target="_blank" rel="noreferrer">Nullstellensatz</a>
+      </div>
+    </div>
   </main>
-  {% include footer.html %}
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-  <!-- Widget placeholders (loaded by default) -->
-  <script src="{{ '/assets/js/widgets/widget1.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget2.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget3.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget4.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget5.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget6.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget7.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget8.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget9.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/widgets/widget10.js' | relative_url }}"></script>
+
+  <div style="text-align: center;">
+    <p><small>Last updated: <span id="last-updated"></span></small></p>
+  </div>
+  
+  <script>
+    function timeAgo(date) {
+      const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      if (days > 0) return `${days}d ${hours}h ago`;
+      if (hours > 0) return `${hours}h ${minutes}m ago`;
+      return `${minutes}m ago`;
+    }
+
+    const lastModified = new Date(document.lastModified);
+
+    function updateTimestamp() {
+      const datePart =
+        `${lastModified.toLocaleDateString("en-US", { weekday: "short" })} ` +
+        `${lastModified.toLocaleDateString("en-US", { month: "short" })} ` +
+        `${lastModified.getDate()}`;
+
+      document.getElementById("last-updated").textContent =
+        `${datePart} (${timeAgo(lastModified)})`;
+    }
+
+    updateTimestamp();
+    setInterval(updateTimestamp, 60000);
+  </script>
 </body>
 </html>

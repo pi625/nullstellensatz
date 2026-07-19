@@ -1,12 +1,24 @@
 ---
 layout: default
 ---
-<article>
-  <header>
-    <h1>{{ page.title }}</h1>
-    <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
-  </header>
-  <section>
-    {{ content }}
-  </section>
+
+<header>
+{% if site.theme_config.show_navbar == true %}
+  {% include horizontal_list.html collection=site.data.home.navbar_entries %}
+  <div class="none"></div>
+{% endif %}
+</header>
+
+<h1 class="post-title">{{ page.title }}</h1>
+<div class="post-date">{{ page.date | date: "%a %b %d" }}</div>
+
+<article class="glass-card">
+  {{ content }}
 </article>
+
+{% if site.theme_config.show_footer == true %}
+  <footer>
+    <div class="solid"></div>
+    {% include horizontal_list.html collection=site.data.home.footer_entries %}
+  </footer>
+{% endif %}
